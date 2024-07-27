@@ -12,7 +12,8 @@ ${LINK_TEXT_XPATH}=              //*[text()='{}']
 
 *** Keywords ***
 Input Text
-    [Documentation]    wrapper to enter text in textbox
+    [Documentation]    Cusom keyword to input text in a given input box
+    ...    based on either placeholder value or label text
     [Arguments]
     ...        ${text}
     ...        ${label}=${None}
@@ -34,7 +35,7 @@ Input Text
     SeleniumLibrary.Input Text    locator=${locator}    text=${text}    clear=${clear}
 
 Click Button
-    [Documentation]    wrapper to enter text in textbox
+    [Documentation]    Custom keyword to click button on a page based on button text
     [Arguments]
     ...    ${text}=${None}
     ...    ${class}=${None}
@@ -56,7 +57,7 @@ Click Button
     SeleniumLibrary.Click Button    locator=${locator}    modifier=${modifier}
 
 Get Text
-    [Documentation]    wrapper to enter text in textbox
+    [Documentation]    Custom keyword to get text from a specific locator
     [Arguments]
     ...    ${xpath}
     ...    ${timeout}=${SHORT_TIMEOUT}
@@ -70,7 +71,7 @@ Get Text
     RETURN    ${text}
 
 Click Element
-    [Documentation]    wrapper to enter text in textbox
+    [Documentation]    Custom keyword to click element based on text. Type of element is required.
     [Arguments]
     ...    ${text}
     ...    ${type}

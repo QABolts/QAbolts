@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    Keyword for topbar component
+Documentation    Page Topbar component
 Resource         ../../settings.resource
 
 

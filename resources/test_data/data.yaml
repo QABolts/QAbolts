@@ -1,0 +1,14 @@
+user:
+  valid:
+    username: Admin
+    password: admin123
+  invalid:
+    username: invalid
+    password: invalid
+employee:
+  valid:
+    firstname: john
+    middlename: mary
+    lastname: doe
+    employee_id: EID-01
+    

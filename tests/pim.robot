@@ -6,6 +6,8 @@ Test Teardown       Close Application
 
 *** Test Cases ***
 Validate Add Employee Functionality
+    [Documentation]    Validate Add Employee Functionality
+    [Tags]    TC-006
     Open The OrangeHRM Live Demo URL
     Navigate To The PIM Module
     Click The Add Employee Button
@@ -14,6 +16,8 @@ Validate Add Employee Functionality
     Verify that the employee is added to the employee list
 
 Validate Search Employee by Name
+    [Documentation]    Validate Search Employee by Name
+    [Tags]    TC-007
     ### Prerequisite - Employee is already created in the system
     New employee is already created in the system
     ### Test Steps
@@ -24,6 +28,8 @@ Validate Search Employee by Name
     Verify that the employee is displayed in the search results.
 
 Validate Search Employee by ID 
+    [Documentation]    Validate Search Employee by ID
+    [Tags]    TC-008
     ### Prerequisite - Employee is already created in the system
     New employee is already created in the system
     ### Test Steps

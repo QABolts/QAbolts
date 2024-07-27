@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    Keyword for login functionality
+Documentation    Sidepanel component
 Resource         ../../settings.resource
 
 

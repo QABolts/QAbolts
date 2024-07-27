@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    Keyword for login functionality
+Documentation    Page header component
 Resource         ../../settings.resource
 
 

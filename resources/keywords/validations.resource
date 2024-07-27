@@ -5,28 +5,26 @@ Resource    ../../settings.resource
 
 *** Variables ***
 ${ALERT_MESSAGE_XPATH}=                //*[contains(@class,"oxd-alert-content-text")]
-${INPUT_FIELD_VAALIDATION_XPATH}=      /ancestor::div[@class="oxd-form-row"]//span
+${INPUT_FIELD_VALIDATION_XPATH}=       /ancestor::div[@class="oxd-form-row"]//span
 ${TOAST_MESSAGE_XPATH}=                //*[contains(concat(' ', normalize-space(@class), ' '), ' oxd-toast-content ')]
 
 
 *** Keywords ***
 Get Alert Error Text
-    [Documentation]    abc
     ${actual_text}=    Get Text    xpath=${ALERT_MESSAGE_XPATH}
     RETURN    ${actual_text}
 
 Get Input Field Validation Error
-    [Documentation]    abc
     [Arguments]
     ...        ${label}=${None}
     ...        ${placeholder}=${None}
     ...        ${timeout}=${SHORT_TIMEOUT}
     IF    $label
-        ${locator}=    Set Variable    ${INPUT_LABEL_XPATH.format('${label}')}${INPUT_FIELD_VAALIDATION_XPATH}
+        ${locator}=    Set Variable    ${INPUT_LABEL_XPATH.format('${label}')}${INPUT_FIELD_VALIDATION_XPATH}
     END
     IF    $placeholder
         ${locator}=    Set Variable
-        ...        ${INPUT_PLACEHOLDER_XPATH.format('${placeholder}')}${INPUT_FIELD_VAALIDATION_XPATH}
+        ...        ${INPUT_PLACEHOLDER_XPATH.format('${placeholder}')}${INPUT_FIELD_VALIDATION_XPATH}
     END
     SeleniumLibrary.Wait Until Page Contains Element    locator=${locator}
     ...        timeout=${timeout}
@@ -38,7 +36,6 @@ Get Input Field Validation Error
     RETURN    ${actual_text}
 
 Get Toast Message Text
-    [Documentation]    abc
     [Arguments]
     ...        ${timeout}=${SHORT_TIMEOUT}
     ${locator}=    Set Variable    ${TOAST_MESSAGE_XPATH}
@@ -52,7 +49,6 @@ Get Toast Message Text
     RETURN    ${actual_text}
 
 Get Input Field Text
-    [Documentation]    wrapper to enter text in textbox
     [Arguments]
     ...    ${label}=${None}
     ...    ${placeholder}=${None}

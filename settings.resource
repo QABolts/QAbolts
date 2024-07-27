@@ -11,6 +11,8 @@ Resource                resources/pages.resource
 Resource                resources/components.resource
 Resource                resources/strings/en.resource
 
+Variables               resources/test_data/data.yaml
+
 *** Variables ***
 # Timeouts
 ${LONG_TIMEOUTS}        120s

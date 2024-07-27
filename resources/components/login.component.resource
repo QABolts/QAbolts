@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    Keyword for login functionality
+Documentation    Login component
 Resource         ../../settings.resource
 
 
@@ -7,16 +7,16 @@ Resource         ../../settings.resource
 Enter An Username
     [Documentation]    keyword to navigate to the url of the application
     [Arguments]    ${username}
-    Input Text    label=Username   text=${username}
+    Input Text    label=${USERNAME_FIELD_LABEL}   text=${username}
 
 Enter An Password
     [Documentation]    keyword to navigate to the url of the application
     [Arguments]    ${password}
-    Input Text    label=Password    text=${password}
+    Input Text    label=${PASSWORD_FIELD_LABEL}    text=${password}
 
 Click The Login Button
     [Documentation]    keyword to navigate to the url of the application
-    Click Element    text=Login    type=button
+    Click Element    text=${LOGIN_BUTTON_TEXT}    type=button
 
 Click Forgot Your Password
     [Documentation]    keyword to navigate to the url of the application
@@ -24,7 +24,6 @@ Click Forgot Your Password
     Click Element    locator=${text}    type=button
 
 Verify That An Error Message Is Displayed
-    [Documentation]    abc
     [Arguments]    ${error_text}
     ${actual_text}=    Get Alert Error Text
     Should Be Equal    ${actual_text}    ${error_text}
