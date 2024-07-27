@@ -21,7 +21,25 @@ Resource         ../../settings.resource
 #     QAboltsLibrary.Input Text    locator=abc    text=xyz    clear=True
 
 Login To The Application
-    Enter A Valid Username    Admin
-    Enter A Valid Password    admin123
+    Enter An Username    Admin
+    Enter An Password    admin123
     Click The Login Button
     Verify That The User Is Navigated To The Dashboard
+
+Enter a valid username
+    Enter An Username    Admin
+
+Enter a valid password
+    Enter An Password    admin123
+
+Enter a invalid username
+    Enter An Username    invalid
+
+Enter a invalid password
+    Enter An Password    invalid
+
+Leave the username field empty
+    Enter An Username    ${EMPTY}
+
+Leave the password field empty
+    Enter An Password    ${EMPTY}

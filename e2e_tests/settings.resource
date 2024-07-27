@@ -3,7 +3,7 @@ Documentation      Initializes the framework, resources and components
 
 # Library files
 Library                 SeleniumLibrary
-# Library                 resources/libs/QAboltsLibrary.py
+Library                 resources/libs/tableutils.py
 
 # Resource files
 Resource                resources/Keywords/keywords.resource
@@ -26,7 +26,7 @@ ${PAGE}                 ${EMPTY}
 
 
 *** Keywords ***
-Start Application
+Open The OrangeHRM Live Demo URL
     [Documentation]    Opens the browser and navigate to the application
     Open Browser    url=${APPLICATION_URL}    browser=${BROWSER}    alias=app
     # ...    remote_url=${SELENIUM_HUB_URL}
