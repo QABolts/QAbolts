@@ -1,5 +1,4 @@
 *** Settings ***
-Library    SeleniumLibrary
 Resource    ../../settings.resource
 
 
@@ -26,10 +25,10 @@ Get Input Field Validation Error
         ${locator}=    Set Variable
         ...        ${INPUT_PLACEHOLDER_XPATH.format('${placeholder}')}${INPUT_FIELD_VALIDATION_XPATH}
     END
-    SeleniumLibrary.Wait Until Page Contains Element    locator=${locator}
+    CustomSeleniumLibrary.Wait Until Page Contains Element    locator=${locator}
     ...        timeout=${timeout}
     ...        error=The element is not present on the page with ${locator} within ${timeout}
-    SeleniumLibrary.Wait Until Element Is Visible    locator=${locator}
+    CustomSeleniumLibrary.Wait Until Element Is Visible    locator=${locator}
     ...        timeout=${timeout}
     ...        error=The element is not visible on the page with ${locator} within ${timeout}4
     ${actual_text}=    Get Text    xpath=${locator}
@@ -39,10 +38,10 @@ Get Toast Message Text
     [Arguments]
     ...        ${timeout}=${SHORT_TIMEOUT}
     ${locator}=    Set Variable    ${TOAST_MESSAGE_XPATH}
-    SeleniumLibrary.Wait Until Page Contains Element    locator=${locator}
+    CustomSeleniumLibrary.Wait Until Page Contains Element    locator=${locator}
     ...        timeout=${timeout}
     ...        error=The element is not present on the page with ${locator} within ${timeout}
-    SeleniumLibrary.Wait Until Element Is Visible    locator=${locator}
+    CustomSeleniumLibrary.Wait Until Element Is Visible    locator=${locator}
     ...        timeout=${timeout}
     ...        error=The element is not visible on the page with ${locator} within ${timeout}4
     ${actual_text}=    Get Text    xpath=${locator}
@@ -59,10 +58,10 @@ Get Input Field Text
     IF    $placeholder
         ${locator}=    Set Variable    ${INPUT_PLACEHOLDER_XPATH.format('${placeholder}')}
     END
-    SeleniumLibrary.Wait Until Page Contains Element    locator=${locator}
+    CustomSeleniumLibrary.Wait Until Page Contains Element    locator=${locator}
     ...        timeout=${timeout}
     ...        error=The element is not present on the page with ${locator} within ${timeout}
-    SeleniumLibrary.Wait Until Element Is Visible    locator=${locator}
+    CustomSeleniumLibrary.Wait Until Element Is Visible    locator=${locator}
     ...        timeout=${timeout}
     ...        error=The element is not visible on the page with ${locator} within ${timeout}
-    SeleniumLibrary.Get Text    locator=${locator}
+    CustomSeleniumLibrary.Get Text    locator=${locator}

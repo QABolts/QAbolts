@@ -2,8 +2,9 @@
 Documentation      Initializes the framework, resources and components
 
 # Library files
-Library                 SeleniumLibrary
 Library                 resources/libs/tableutils.py
+Library                 resources/libs/CustomSeleniumLibrary.py
+Library                 resources/libs/SharedLibrary.py
 
 # Resource files
 Resource                resources/Keywords/keywords.resource
@@ -30,15 +31,10 @@ ${PAGE}                 ${EMPTY}
 *** Keywords ***
 Open The OrangeHRM Live Demo URL
     [Documentation]    Opens the browser and navigate to the application
-    Open Browser    url=${APPLICATION_URL}    browser=${BROWSER}    alias=app
+    CustomSeleniumLibrary.Open Browser    url=${APPLICATION_URL}    browser=${BROWSER}    alias=app
     # ...    remote_url=${SELENIUM_HUB_URL}
-    Maximize Browser Window
+    CustomSeleniumLibrary.Maximize Browser Window
 
 Close Application
     [Documentation]    Closes the current browser
-    Close Browser
-
-
-
-# Click
-#     Click Element    
+    CustomSeleniumLibrary.Close Browser

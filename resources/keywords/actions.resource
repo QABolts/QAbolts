@@ -1,5 +1,4 @@
 *** Settings ***
-Library    SeleniumLibrary
 Resource    ../../settings.resource
 
 
@@ -26,13 +25,13 @@ Input Text
     IF    $placeholder
         ${locator}=    Set Variable    ${INPUT_PLACEHOLDER_XPATH.format('${placeholder}')}
     END
-    SeleniumLibrary.Wait Until Page Contains Element    locator=${locator}
+    CustomSeleniumLibrary.Wait Until Page Contains Element    locator=${locator}
     ...        timeout=${timeout}
     ...        error=The element is not present on the page with ${locator} within ${timeout}
-    SeleniumLibrary.Wait Until Element Is Visible    locator=${locator}
+    CustomSeleniumLibrary.Wait Until Element Is Visible    locator=${locator}
     ...        timeout=${timeout}
     ...        error=The element is not visible on the page with ${locator} within ${timeout}
-    SeleniumLibrary.Input Text    locator=${locator}    text=${text}    clear=${clear}
+    CustomSeleniumLibrary.Input Text    locator=${locator}    text=${text}    clear=${clear}
 
 Click Button
     [Documentation]    Custom keyword to click button on a page based on button text
@@ -48,26 +47,26 @@ Click Button
     IF    $class
         ${locator}=    Set Variable    ${INPUT_PLACEHOLDER_XPATH.format('${class}')}
     END
-    SeleniumLibrary.Wait Until Page Contains Element    locator=${locator}
+    CustomSeleniumLibrary.Wait Until Page Contains Element    locator=${locator}
     ...        timeout=${timeout}
     ...        error=The element is not present on the page with ${locator} within ${timeout}
-    SeleniumLibrary.Wait Until Element Is Visible    locator=${locator}
+    CustomSeleniumLibrary.Wait Until Element Is Visible    locator=${locator}
     ...        timeout=${timeout}
     ...        error=The element is not visible on the page with ${locator} within ${timeout}
-    SeleniumLibrary.Click Button    locator=${locator}    modifier=${modifier}
+    CustomSeleniumLibrary.Click Button    locator=${locator}    modifier=${modifier}
 
 Get Text
     [Documentation]    Custom keyword to get text from a specific locator
     [Arguments]
     ...    ${xpath}
     ...    ${timeout}=${SHORT_TIMEOUT}
-    SeleniumLibrary.Wait Until Page Contains Element    locator=${xpath}
+    CustomSeleniumLibrary.Wait Until Page Contains Element    locator=${xpath}
     ...        timeout=${timeout}
     ...        error=The element is not present on the page with ${xpath} within ${timeout}
-    SeleniumLibrary.Wait Until Element Is Visible    locator=${xpath}
+    CustomSeleniumLibrary.Wait Until Element Is Visible    locator=${xpath}
     ...        timeout=${timeout}
     ...        error=The element is not visible on the page with ${xpath} within ${timeout}
-    ${text}=    SeleniumLibrary.Get Text   locator=${xpath}
+    ${text}=    CustomSeleniumLibrary.Get Text   locator=${xpath}
     RETURN    ${text}
 
 Click Element
@@ -77,16 +76,18 @@ Click Element
     ...    ${type}
     ...    ${xpath}=${EMPTY}
     ...    ${timeout}=${SHORT_TIMEOUT}
+    ${current_url}=    CustomSeleniumLibrary.Get Location
+    Append To Global Array    ${current_url}
     IF    "${type}" == "button"
         ${locator}=    Set Variable    ${xpath}${BUTTON_TEXT_XPATH.format('${text}')}
     END
     IF    "${type}" == "link"
         ${locator}=    Set Variable    ${xpath}${LINK_TEXT_XPATH.format('${text}')}
     END
-    SeleniumLibrary.Wait Until Page Contains Element    locator=${locator}
+    CustomSeleniumLibrary.Wait Until Page Contains Element    locator=${locator}
     ...        timeout=${timeout}
     ...        error=The element is not present on the page with ${locator} within ${timeout}
-    SeleniumLibrary.Wait Until Element Is Visible    locator=${locator}
+    CustomSeleniumLibrary.Wait Until Element Is Visible    locator=${locator}
     ...        timeout=${timeout}
     ...        error=The element is not visible on the page with ${locator} within ${timeout}
-    SeleniumLibrary.Click Element    locator=${locator}
+    CustomSeleniumLibrary.Click Element    locator=${locator}
