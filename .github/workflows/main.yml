@@ -29,7 +29,7 @@ jobs:
       run: pip install  robotframework-pabot robotframework robotframework-seleniumlibrary
 
     - name : run tests
-      run: pabot --testlevelsplit --processes 3 --listener .\resources\libs\robotListener.py .\tests\login.robot
+      run: pabot --testlevelsplit --processes 3 --listener resources/libs/robotListener.py tests/login.robot
 
     - uses: actions/upload-artifact@v4
       if: always()
