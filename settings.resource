@@ -7,7 +7,7 @@ Library                 resources/libs/CustomSeleniumLibrary.py
 Library                 resources/libs/SharedLibrary.py
 
 # Resource files
-Resource                resources/Keywords/keywords.resource
+Resource                resources/keywords/keywords.resource
 Resource                resources/pages.resource
 Resource                resources/components.resource
 Resource                resources/strings/en.resource
