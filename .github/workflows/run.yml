@@ -1,0 +1,104 @@
+name: Run Robot Framework Tests with Pabot
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  split-tests:
+    runs-on: ubuntu-latest
+    # outputs:
+    #   test_chunks: ${{ steps.split.outputs.test_chunks }}
+    outputs:
+      matrix_list: ${{ steps.generate-list.outputs.list }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name : install dependencies
+        run: pip install  -r requirements.txt
+
+
+      # - name: Run Python script to generate list
+      #   id: generate-list
+      #   run: |
+      #     python resources/libs/TestCasesFinder.py > result.txt
+      #     result=$(cat result.txt)
+      #     echo "::set-output name=list::$result"
+      #   shell: bash
+
+      - name: Run Python script to generate list
+        id: generate-list
+        run: |
+          result=$(python  resources/libs/TestCasesFinder.py)
+          echo "Result from Python: $result"
+          echo "list=$result" >> $GITHUB_OUTPUT
+
+      # - name: Debug test chunks output
+      #   run: echo ${{ steps.split.outputs.matrix_list }}
+
+      # - name: Generate test list file
+      #   run: |
+      #     python resources/libs/TestCasesFinder.py
+
+      # - name: Split test list into chunks
+      #   id: split
+      #   run: |
+      #     # Read the test list from the file
+      #     tests=$(cat tests_list.txt)
+      #     # Initialize an array to hold the test chunks
+      #     declare -a chunks
+      #     i=0
+      #     chunk_size=1
+      #     for test in $tests; do
+      #       chunks[$i]+="$test "
+      #       ((i++ % chunk_size)) || ((i++))
+      #     done
+      #     # Convert the array to a JSON format to pass to the next jobs
+      #     test_chunks=$(echo ${chunks[@]} | jq -R 'split("\n") | map(select(. != ""))')
+      #     echo "::set-output name=test_chunks::$test_chunks"
+      - name: Debug test chunks output
+        run: echo ${{ steps.generate-list.outputs.matrix_list }}
+
+  run-tests:
+    needs: split-tests
+    runs-on: runs-on,runner=4cpu-linux-x64,run-id=${{ github.run_id }}
+    strategy:
+      matrix:
+        chunk: ${{ fromJson(needs.split-tests.outputs.matrix_list) }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hoverkraft-tech/compose-action@v1.5.1
+        with:
+          compose-file: "./docker-compose.yml"
+          up-flags: "--scale chrome=20"
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install Robot Framework, Pabot, and dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Robot Framework tests with Pabot
+        run: |
+          echo "Running tests: ${{ matrix.chunk }}"
+          # Use Pabot to run the tests in parallel across the chunk
+          pabot --testlevelsplit --processes 2 --listener resources/libs/robotListener.py ${{ matrix.chunk }} tests
+
+      # - uses: actions/upload-artifact@v4
+      #   if: always()
+      #   with:
+      #     name: my-artifact_${{ matrix.chunk }}
+      #     path: ./

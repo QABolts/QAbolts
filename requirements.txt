@@ -1,0 +1,4 @@
+robotframework-pabot
+robotframework
+robotframework-seleniumlibrary
+pyyaml

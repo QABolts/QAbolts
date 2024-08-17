@@ -1,0 +1,9 @@
+cache
+__pycache__
+*.png
+*.html
+*.xml
+*.pyc
+pabot_results
+.pabotsuitenames
+application_urls.txt
