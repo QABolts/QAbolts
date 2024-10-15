@@ -32,7 +32,7 @@ ${PAGE}                 ${EMPTY}
 Open The OrangeHRM Live Demo URL
     [Documentation]    Opens the browser and navigate to the application
     CustomSeleniumLibrary.Open Browser    url=${APPLICATION_URL}    browser=${BROWSER}    alias=app
-    ...    remote_url=${SELENIUM_HUB_URL}
+    # ...    remote_url=${SELENIUM_HUB_URL}
     CustomSeleniumLibrary.Maximize Browser Window
 
 Close Application

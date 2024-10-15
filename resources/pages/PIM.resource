@@ -52,7 +52,7 @@ Click the "Search" button.
     Click Element    text=${SEARCH_BUTTON_TEXT}    type=button
 
 Verify that the employee is displayed in the search results.
-    Verify Table Values    
+    Verify Table Values
     ...    column_name=${EMPLOYEE_LIST_TABLE_FIRST_MIDDLE_NAME}
     ...    column_value=${employee.valid.firstname} ${employee.valid.middlename}
     Verify Table Values
